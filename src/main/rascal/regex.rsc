@@ -7,10 +7,7 @@ layout Whitespace = [\t\n\r\ ]*;
 
 lexical Integer = [0-9]+ !>> [0-9];
 
-start syntax RegExp = Alternation+;
-
-syntax Alternation =
-  Expression ('|' Expression? )*;
+start syntax RegExp = Expression ('|' Expression )*;
 
 syntax Expression = Element+;
 
