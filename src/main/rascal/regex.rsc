@@ -18,32 +18,34 @@ syntax Atom
   = emptyString: "ε"
   | letter: Letter
   | digit: Digit
-  | characterclass: CharacterClass
   > caption: Capture;
+
+
+//  | characterclass: CharacterClass
 
 // TODO add {0,3}
 syntax Quantifier
-  = occurrences: ('?' | '+' |  '*')
-  | exactly: '{' Integer '}'  // (',' Integer)? of {',' Integer}? werkt niet
+  = kleeneStar: '*' //('?' | '+' |  '*')
+  // | exactly: '{' Integer '}'  // (',' Integer)? of {',' Integer}? werkt niet
   ;
 
 // [a-z]
-syntax CharacterClass
-  = characterClass: '[' '^'? CharacterClassRange+  ']'
-  ;
+// syntax CharacterClass
+//   = characterClass: '[' '^'? CharacterClassRange+  ']'
+//   ;
 
-syntax CharacterClassRange
-  = range: Character '-' Character
-  ;
+// syntax CharacterClassRange
+//   = range: Character '-' Character
+//   ;
 
-syntax Character
-  = letter: Letter
-  | digit: Digit
-  ;
+// syntax Character
+//   = letter: Letter
+//   | digit: Digit
+//   ;
 
 // In Linz the () are used to define grouping/ordering a|b(d|c) so a or b followd by d or c.
 syntax Capture =
-  elements: '(' RegExp+ ')'
+  elements: '(' RegExp ')'
   ;
 
 lexical Letter = [a-zA-Z];
@@ -60,15 +62,23 @@ test bool simpleTest() {
   parse(#RegExp, "a|b");
   parse(#RegExp, "a|b|c");
   parse(#RegExp, "a|b(d|c)");
-  parse(#RegExp, "a+b*");
-  parse(#RegExp, "a+(b*)?");
-  parse(#RegExp, "[a-z]");
-  parse(#RegExp, "[a-zA-Z]");
-  parse(#RegExp, "[^a-zA-Z]");
-  parse(#RegExp, "[a-zA-Z0-9]");
-  parse(#RegExp, "[a-zA-Z0-9]{2}");
-  parse(#RegExp, "ab?[a-zA-Z0-9]{2}d{5}");
-
+  // parse(#RegExp, "a+b*");
+  // parse(#RegExp, "a+(b*)?");
+  // parse(#RegExp, "[a-z]");
+  // parse(#RegExp, "[a-zA-Z]");
+  // parse(#RegExp, "[^a-zA-Z]");
+  // parse(#RegExp, "[a-zA-Z0-9]");
+  // parse(#RegExp, "[a-zA-Z0-9]{2}");
+  // parse(#RegExp, "ab?[a-zA-Z0-9]{2}d{5}");
+    parse(#RegExp, "a");
+    parse(#RegExp, "ε");
+    parse(#RegExp, "ab*");
+    parse(#RegExp, "a|b");
+    parse(#RegExp, "ab|ε");
+    parse(#RegExp, "a(b|c)");
+    parse(#RegExp, "a*");
+    parse(#RegExp, "(ab)*");
+    parse(#RegExp, "a(b|c)d*");
   return true;
 }
 
