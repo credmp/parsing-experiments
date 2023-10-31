@@ -11,6 +11,7 @@
         packages = [
           pkgs.jdk
           pkgs.jdt-language-server
+	  pkgs.maven
         ];
       };
     });

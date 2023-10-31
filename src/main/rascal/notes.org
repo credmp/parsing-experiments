@@ -1,0 +1,24 @@
+#+title: Notes
+
+#+begin_src text
+appl(prod(sort("RegExp"),[sort("Expression"),layouts("Whitespace"),\iter-star-seps(seq([cilit("|"),layouts("Whitespace"),sort("Expression")]),[layouts("Whitespace")])],{}), [
+appl(prod(sort("Expression"),[\iter-seps(sort("Element"),[layouts("Whitespace")])],{}),[
+appl(regular(\iter-seps(sort("Element"),[layouts("Whitespace")])),[
+appl(prod(sort("Element"),[sort("Atom"),layouts("Whitespace"),opt(sort("Quantifier"))],{}),[
+appl(prod(label("letter",sort("Atom")),[lex("Letter")],{}),[
+appl(prod(lex("Letter"),[\char-class([range(65,90),range(97,122)])],{}),[char(97)],src=|unknown:///|(0,1,<1,0>,<1,1>))],src=|unknown:///|(0,1,<1,0>,<1,1>)),
+appl(prod(layouts("Whitespace"),[\iter-star(\char-class([range(9,10),range(13,13),range(32,32)]))],{}),[
+appl(regular(\iter-star(\char-class([range(9,10),range(13,13),range(32,32)]))),[],src=|unknown:///|(1,0,<1,1>,<1,1>))],src=|unknown:///|(1,0,<1,1>,<1,1>)),
+appl(regular(opt(sort("Quantifier"))),[],src=|unknown:///|(1,0,<1,1>,<1,1>))],src=|unknown:///|(0,1,<1,0>,<1,1>)),
+appl(prod(layouts("Whitespace"),[\iter-star(\char-class([range(9,10),range(13,13),range(32,32)]))],{}),[
+appl(regular(\iter-star(\char-class([range(9,10),range(13,13),range(32,32)]))),[],src=|unknown:///|(1,0,<1,1>,<1,1>))],src=|unknown:///|(1,0,<1,1>,<1,1>)),
+appl(prod(sort("Element"),[sort("Atom"),layouts("Whitespace"),opt(sort("Quantifier"))],{}),[
+appl(prod(label("letter",sort("Atom")),[lex("Letter")],{}),[
+appl(prod(lex("Letter"),[\char-class([range(65,90),range(97,122)])],{}),[char(98)],src=|unknown:///|(1,1,<1,1>,<1,2>))],src=|unknown:///|(1,1,<1,1>,<1,2>)),
+appl(prod(layouts("Whitespace"),[\iter-star(\char-class([range(9,10),range(13,13),range(32,32)]))],{}),[
+appl(regular(\iter-star(\char-class([range(9,10),range(13,13),range(32,32)]))),[],src=|unknown:///|(2,0,<1,2>,<1,2>))],src=|unknown:///|(2,0,<1,2>,<1,2>)),
+appl(regular(opt(sort("Quantifier"))),[],src=|unknown:///|(2,0,<1,2>,<1,2>))],src=|unknown:///|(1,1,<1,1>,<1,2>))],src=|unknown:///|(0,2,<1,0>,<1,2>))],src=|unknown:///|(0,2,<1,0>,<1,2>)),
+appl(prod(layouts("Whitespace"),[\iter-star(\char-class([range(9,10),range(13,13),range(32,32)]))],{}),[
+appl(regular(\iter-star(\char-class([range(9,10),range(13,13),range(32,32)]))),[],src=|unknown:///|(2,0,<1,2>,<1,2>))],src=|unknown:///|(2,0,<1,2>,<1,2>)),
+appl(regular(\iter-star-seps(seq([cilit("|"),layouts("Whitespace"),sort("Expression")]),[layouts("Whitespace")])),[],src=|unknown:///|(2,0,<1,2>,<1,2>))],src=|unknown:///|(0,2,<1,0>,<1,2>))
+#+end_src

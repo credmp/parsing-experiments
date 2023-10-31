@@ -3,44 +3,47 @@ module regex
 import ParseTree;
 import IO;
 
-layout Whitespace = [\t\n\r\ ]*;
+// A regular expression does not have whitespace
+//layout Whitespace = [\t\n\r\ ]*;
 
-lexical Integer = [0-9]+ !>> [0-9];
+lexical Integer = integer: [0-9]+ !>> [0-9];
 
-start syntax RegExp = Expression ('|' Expression )*;
+start syntax RegExp = alternation: Expression lhs ('|' Expression rhs )*;
 
-syntax Expression = Element+;
+syntax Expression = elements: Element+;
 
-syntax Element = Atom Quantifier?;
+syntax Element = element: Atom Quantifier?;
 
 syntax Atom
-  = letter: Letter
+  = emptyString: "ε"
+  | letter: Letter
   | digit: Digit
   | characterclass: CharacterClass
   > caption: Capture;
 
 // TODO add {0,3}
 syntax Quantifier
-  = ('?' | '+' |  '*')
-  | '{' Integer '}'  // (',' Integer)? of {',' Integer}? werkt niet
+  = occurrences: ('?' | '+' |  '*')
+  | exactly: '{' Integer '}'  // (',' Integer)? of {',' Integer}? werkt niet
   ;
 
 // [a-z]
 syntax CharacterClass
-  = '[' '^'? CharacterClassRange+  ']'
+  = characterClass: '[' '^'? CharacterClassRange+  ']'
   ;
 
 syntax CharacterClassRange
-  = Character '-' Character
+  = range: Character '-' Character
   ;
 
 syntax Character
-  = Letter
-  | Digit
+  = letter: Letter
+  | digit: Digit
   ;
 
+// In Linz the () are used to define grouping/ordering a|b(d|c) so a or b followd by d or c.
 syntax Capture =
-  '(' Element+ ')'
+  elements: '(' RegExp+ ')'
   ;
 
 lexical Letter = [a-zA-Z];
@@ -51,8 +54,12 @@ lexical Integer = [0-9]+ !>> [0-9];
 test bool simpleTest() {
   // Success
   parse(#RegExp, "a");
+  parse(#RegExp, "ε");
   parse(#RegExp, "ab");
+  parse(#RegExp, "aεb");
   parse(#RegExp, "a|b");
+  parse(#RegExp, "a|b|c");
+  parse(#RegExp, "a|b(d|c)");
   parse(#RegExp, "a+b*");
   parse(#RegExp, "a+(b*)?");
   parse(#RegExp, "[a-z]");
@@ -64,3 +71,4 @@ test bool simpleTest() {
 
   return true;
 }
+
